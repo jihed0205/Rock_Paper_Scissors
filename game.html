@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <style>
+      body {
+        background-color: rgb(0, 0, 60);
+      }
+      .container {
+        max-width: 1260px;
+        margin: 0 auto;
+      }
+      .h1 {
+        color: white;
+        font-family: cursive;
+        margin-left: 30px;
+        margin-top: 72px;
+      }
+      .h2 {
+        color: white;
+        font-family: cursive;
+        margin-left: 30px;
+        margin-top: 72px;
+        margin-right: 30px;
+        margin-bottom: 72px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 100px;
+        font-size: 32px;
+      }
+      .h3 {
+        color: white;
+        font-family: cursive;
+        margin-left: 30px;
+        margin-top: 72px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 100px;
+        font-size: 32px;
+      }
+      .h4 {
+        color: white;
+        font-family: cursive;
+        margin-left: 30px;
+        margin-top: 72px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 100px;
+        font-size: 32px;
+      }
+      .frame1 {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        margin-bottom: 20px;
+        padding-bottom: 25px;
+        height: 100px;
+      }
+      .ph1:hover,
+      .ph2:hover,
+      .ph3:hover {
+        transform: scale(1.2);
+        border-color: rgb(0, 0, 60);
+      }
+      .ph1,
+      .ph2,
+      .ph3 {
+        width: 100px;
+        margin-top: 20px;
+        border: solid gray 3px;
+        padding: 15px;
+        border-radius: 1000px;
+        transition: transform 0.8s ease, border-color 0.8s ease;
+      }
+      .ph1:hover {
+        cursor: pointer;
+      }
+      .ph2:hover {
+        cursor: pointer;
+      }
+      .ph3:hover {
+        cursor: pointer;
+      }
+      /*
+      0 : rock
+      1 : paper
+      2 : scissors
+      */
+      .frame2 {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+        height: 200px;
+      }
+      .frame3 {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 2fr;
+      }
+      .table {
+        border: solid rgb(159, 131, 158) 2px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        border-radius: 20px;
+      }
+      .col1 {
+        margin-left: 25px;
+        font-size: 40px;
+        color: green;
+        font-family: cursive;
+        margin-top: 20%;
+      }
+      .col2 {
+        margin-left: 25px;
+        font-size: 40px;
+        color: gray;
+        font-family: cursive;
+        margin-top: 20%;
+      }
+      .col3 {
+        margin-left: 25px;
+        font-size: 40px;
+        color: red;
+        font-family: cursive;
+        margin-top: 20%;
+      }
+      .frame4 {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 50px;
+        align-items: center;
+        justify-items: center;
+      }
+      .but {
+        font-size: 14px;
+        width: 120px;
+        height: 60px;
+        font-family: cursive;
+        border: ridge black 4px;
+        border-radius: 5px;
+        background-color: rgb(221, 174, 17);
+        transition: transform 0.4s ease;
+      }
+      .but:hover {
+        cursor: pointer;
+        transform: scale(1.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="frame1">
+        <h1 class="h1">Choose your move :</h1>
+        <div class="photo1" onclick="rock()">
+          <img src="img/rock-emoji.png" alt="" class="ph1" />
+        </div>
+        <div class="photo2" onclick="paper()">
+          <img src="img/paper-emoji.png" alt="" class="ph2" />
+        </div>
+        <div class="photo3" onclick="scissors()">
+          <img src="img/scissors-emoji.png" alt="" class="ph3" />
+        </div>
+      </div>
+      <div class="frame2">
+        <div class="h2">Computer move : <span id="sp1"></span></div>
+        <div class="h3">Your move : <span id="sp2"></span></div>
+      </div>
+      <div class="frame3">
+        <div class="h4">Result : <span class="sp3" id="sp3"></span></div>
+        <div class="table">
+          <div class="col1">Wins : <span id="sp11"></span></div>
+          <div class="col2">Ties : <span id="sp22"></span></div>
+          <div class="col3">Losses : <span id="sp33"></span></div>
+        </div>
+      </div>
+      <div class="frame4">
+        <button class="but" onclick="reset()">Reset Your SCORE</button>
+      </div>
+    </div>
+    <script>
+      let w = 0;
+      let t = 0;
+      let l = 0;
+      function rock() {
+        document.getElementById("sp2").innerHTML =
+          '<img src="img/rock-emoji.png" alt="Paper" width="80">';
+        let v = Math.floor(Math.random() * 3);
+        let r = 0;
+        if (r == v) {
+          console.log("tie");
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: gray;">Tie</span>';
+          t = t + 1;
+          document.getElementById("sp22").innerHTML = t;
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/rock-emoji.png" alt="rock" width="80" margin="70">';
+        } else if (v == 1) {
+          w = w + 1;
+          document.getElementById("sp11").innerHTML = w;
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/scissors-emoji.png" alt="scissors" width="80">';
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: green;">Win</span>';
+
+          console.log("win");
+        } else {
+          l = l + 1;
+          document.getElementById("sp33").innerHTML = l;
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/paper-emoji.png" alt="Paper" width="80">';
+          console.log("Lost");
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: red;">Lost</span>';
+
+          console.log("lose");
+        }
+      }
+      function paper() {
+        document.getElementById("sp2").innerHTML =
+          '<img src="img/paper-emoji.png" alt="Paper" width="80">';
+        let v = Math.floor(Math.random() * 3);
+        let r = 1;
+        if (r == v) {
+          t = t + 1;
+          document.getElementById("sp22").innerHTML = t;
+          console.log("tie");
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: gray;">Tie</span>';
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/paper-emoji.png" alt="Paper" width="80" margin="70">';
+        } else if (v == 0) {
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/rock-emoji.png" alt="Paper" width="80">';
+          w = w + 1;
+          document.getElementById("sp11").innerHTML = w;
+          console.log("win");
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: green;">Win</span>';
+        } else {
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/scissors-emoji.png" alt="Paper" width="80">';
+          l = l + 1;
+          document.getElementById("sp33").innerHTML = l;
+          console.log("Lost");
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: red;">Lost</span>';
+        }
+      }
+      function scissors() {
+        document.getElementById("sp2").innerHTML =
+          '<img src="img/scissors-emoji.png" alt="Paper" width="80">';
+        let v = Math.floor(Math.random() * 3);
+        let r = 2;
+        if (r == v) {
+          console.log("tie");
+          t = t + 1;
+          document.getElementById("sp22").innerHTML = t;
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: gray;">Tie</span>';
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/scissors-emoji.png" alt="scissors" width="80" margin="70">';
+        } else if (v == 1) {
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/paper-emoji.png" alt="paper" width="80">';
+          w = w + 1;
+          document.getElementById("sp11").innerHTML = w;
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: green;">Win</span>';
+          console.log("win");
+        } else {
+          document.getElementById("sp1").innerHTML =
+            '<img src="img/rock-emoji.png" alt="rock" width="80">';
+          l = l + 1;
+          document.getElementById("sp33").innerHTML = l;
+          console.log("Lost");
+          document.getElementById("sp3").innerHTML =
+            '<span style="color: red;">Lost</span>';
+          console.log("lose");
+        }
+      }
+      function reset() {
+        w = 0;
+        t = 0;
+        l = 0;
+        document.getElementById("sp11").innerHTML = w;
+        document.getElementById("sp22").innerHTML = t;
+        document.getElementById("sp33").innerHTML = l;
+      }
+    </script>
+  </body>
+</html>
